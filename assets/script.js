@@ -71,4 +71,5 @@ $(function () {
   
   saveButtonEl.addEventListener('click', function () {
     localStorage.setItem("save", save);
+    console.log("save");
   });
