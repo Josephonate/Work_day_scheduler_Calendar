@@ -59,8 +59,8 @@ $(function () {
       event: ""
     },
   ];
-  var today = dayjs().format('dddd, MMMM DD');
-  var timeNow = dayjs().format('H A');
+  var today = moment().format('dddd, MMMM Do');
+  var timeNow = moment().format('H A');
   
   $('#currentDay').text(today);
   
