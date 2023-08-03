@@ -21,7 +21,7 @@ $(function () {
     //
     // TODO: Add code to display the current date in the header of the page.
   });
-  var planWorkday = [
+  var planerWorkday = [
     {
       time: "9 AM",
       event: ""
@@ -64,12 +64,16 @@ $(function () {
   
   $('#currentDay').text(today);
   
+  for (const hour of planerWorkday) {
+    const textarea = localStorage.getItem(`#text-${hour.id}`) || ""
+    
+  }
+  
   
   //trying to add save button listener
-  var saveButtonEl = document.querySelector('.saveBtn');
-  var save = localStorage.getItem("save")
-  
-  saveButtonEl.addEventListener('click', function () {
-    localStorage.setItem("save", save);
-    console.log("save");
-  });
+ function saveEvent(id){
+  var textEvent =  `#text-${id}`
+  const action = $(textEvent). val();
+
+  localStorage.setItem(textEvent, action);
+ }
