@@ -23,15 +23,15 @@ $(function () {
 });
 var planerWorkday = [
   {
-    time: "9 AM",
+    time: "12 AM",
     event: ""
   },
   {
-    time: "10 AM",
+    time: "1 AM",
     event: ""
   },
   {
-    time: "11 AM",
+    time: "2 AM",
     event: ""
   },
   {
@@ -68,7 +68,7 @@ function showWorkday() {
 
   for (const hour of planerWorkday) {
 
-    const action = localStorage.getItem(`text-${hour.event}`) || "";
+    // const action = localStorage.getItem(value, time) || "";
     var pastPresent;
     var time = planerWorkday.time;
     var plannerNow = moment(timeNow, 'H A');
@@ -76,7 +76,7 @@ function showWorkday() {
     
 
     if (plannerNow.isBefore(plannerAction) === true) {
-      pastPresent = "futuret";
+      pastPresent = "future";
     } else if (plannerNow.isAfter(plannerAction) === true) {
       pastPresent = "past";
     } else {
@@ -88,8 +88,8 @@ function showWorkday() {
     const html = `
   <div id="${hour.time}" class="row time-block">
   <div class="col-2 col-md-1 hour text-center py-3">${hour.time}</div>
-  <textarea id="text-${hour.event}"class="col-8 col-md-10 description ${pastPresent}" rows="3">${action}</textarea>
-  <button class="btn saveBtn col-2 col-md-1" aria-label="save" onclick="saveEvent(${hour.event})">
+  <textarea class="col-8 col-md-10 description ${pastPresent}" rows="3"></textarea>
+  <button class="btn saveBtn col-2 col-md-1" aria-label="save">
     <i class="fas fa-save" aria-hidden="true"></i>
   </button>
 </div>
@@ -99,13 +99,18 @@ function showWorkday() {
 
 }
 
+$(document).ready(function () {
+  // listen for save button clicks
+  $('.saveBtn').on('click', function () {
+    // get nearby values
+    var value = $(this).siblings('.description').val();
+    var time = $(this).parent().attr('id');
 
+    console.log(value, time)
 
-//trying to add save button listener
-function saveEvent(event) {
-  var textEvent = `#text-${event}`
-  const action = $(textEvent).val();
-  console.log(action);
-  localStorage.setItem(textEvent, action);
-}
+    // save in localStorage
+    localStorage.setItem(time, value);
+  });
+})
+
 showWorkday();
