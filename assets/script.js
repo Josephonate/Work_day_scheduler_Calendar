@@ -67,8 +67,8 @@ $('#currentDay').text(today);
 function showWorkday() {
 
   for (const hour of planerWorkday) {
-    
-    const action = localStorage.getItem(`#text-${hour.time}`) || ""
+
+    const action = localStorage.getItem(`text-${hour.event}`) || "";
     var pastPresent;
     var time = planerWorkday.time;
     var plannerNow = moment(timeNow, 'H A');
@@ -88,23 +88,24 @@ function showWorkday() {
     const html = `
   <div id="${hour.time}" class="row time-block">
   <div class="col-2 col-md-1 hour text-center py-3">${hour.time}</div>
-  <textarea id="text-${hour.time}"class="col-8 col-md-10 description ${pastPresent}" rows="3">${action}</textarea>
-  <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+  <textarea id="text-${hour.event}"class="col-8 col-md-10 description ${pastPresent}" rows="3">${action}</textarea>
+  <button class="btn saveBtn col-2 col-md-1" aria-label="save" onclick="saveEvent(${hour.event})">
     <i class="fas fa-save" aria-hidden="true"></i>
   </button>
 </div>
   `
     $("#planner").append(html);
   }
+
 }
 
 
 
 //trying to add save button listener
-function saveEvent(id) {
-  var textEvent = `#text-${id}`
+function saveEvent(event) {
+  var textEvent = `#text-${event}`
   const action = $(textEvent).val();
-
+  console.log(action);
   localStorage.setItem(textEvent, action);
 }
 showWorkday();
