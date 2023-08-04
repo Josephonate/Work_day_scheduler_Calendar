@@ -1,14 +1,14 @@
 var planerWorkday = [
   {
-    time: "12 AM",
+    time: "9 AM",
     event: ""
   },
   {
-    time: "1 AM",
+    time: "10 AM",
     event: ""
   },
   {
-    time: "2 AM",
+    time: "11 AM",
     event: ""
   },
   {
